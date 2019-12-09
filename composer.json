@@ -1,0 +1,22 @@
+{
+    "name": "anton/test-solar-studio",
+    "description": "",
+    "type": "project",
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Renderer.php",
+            "routes/GetAccounts.php",
+            "routes/PostAccounts.php"
+        ]
+    },
+    "scripts": {
+        "phpcs": "phpcs"
+    }
+}

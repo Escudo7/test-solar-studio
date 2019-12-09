@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Test Task</title>
+
+    <!-- Scripts -->
+    <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+        $(document).on('submit', 'form', function (event) {
+            event.preventDefault();     
+            const form = $(this);
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize()
+            }).done(function() {
+                alert("Спасибо, Ваши данные зафиксированы");
+                document.getElementById("newAccount").reset();
+            });
+        });
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <table class="table table-hover table-bordered">
+        <tr class="table-secondary">
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+            <th>Номер счета</th>
+            <th>Сумма на счете</th>
+        </tr>
+        <?php foreach ($accounts as $account): ?>
+        <tr>
+            <td><?= $account['name'] ?></td>
+            <td><?= $account['surname'] ?></td>
+            <td><?= $account['patronymic'] ?></td>
+            <td><?= $account['birthday'] ?></td>
+            <td><?= $account['account'] ?></td>
+            <td><?= $account['amount'] ?></td>
+        </tr>
+        <?php endforeach ?>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <?php if ($page > 1) : ?>
+            <li class="page-item"><a class="page-link" href="?page=<?= $page - 1 ?>">Назад</a></li>
+        <?php endif; ?>
+        <?php if ($page < $maxPage) : ?>
+            <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>">Вперед</a></li>
+        <?php endif; ?>
+        </ul>
+    </nav>
+
+<form method="POST" name="newAccount" id="newAccount" action="/">
+    <div class="form-row">
+        <div class="form-group col-md-3 ml-4">
+            <label for="name" class="col-form-label text-md-right">Имя</label>
+            <div>
+                <input id="name" type="text" class="form-control" name="name">
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="surname" class="col-form-label text-md-right">Фамилия</label>
+            <div>
+                <input id="surname" type="text" class="form-control" name="surname">
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="patronymic" class="col-form-label text-md-right">Отчество</label>
+            <div>
+                <input id="patronymic" type="text" class="form-control" name="patronymic">
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group  col-md-3 ml-4">
+            <label for="birthday" class="col-form-label text-md-right">День рождения</label>
+            <div>
+                <input id="birthday" type="date" class="form-control" name="birthday">
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="account" class="col-form-label text-md-right">Номер счета</label>
+            <div>
+                <input id="account" type="text" class="form-control" name="account">
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="amount" class="col-form-label text-md-right">Сумма на счете</label>
+            <div>
+                <input id="amount" type="text" class="form-control" name="amount">
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 ml-4">
+            <button type="submit" id="form-submit" class="btn btn-secondary">Отправить</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
