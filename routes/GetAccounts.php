@@ -3,6 +3,7 @@
 namespace Routes\GetAccounts;
 
 use App\Account;
+
 use function App\Renderer\render;
 
 function routeGetAccounts()

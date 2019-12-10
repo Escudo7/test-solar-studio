@@ -11,7 +11,7 @@ function routePostAccounts()
     });
     
     $account = new Account();
-    foreach($data as $key => $value) {
+    foreach ($data as $key => $value) {
         $account->$key = $value;
     }
     $account->save();
